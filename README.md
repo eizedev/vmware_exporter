@@ -119,6 +119,29 @@ limited:
         resourcepools: False
 ```
 
+With optional limit to specific custom attributes:
+
+```yaml
+default:
+    vsphere_host: "vcenter"
+    vsphere_user: "user"
+    vsphere_password: "password"
+    ignore_ssl: False
+    specs_size: 5000
+    fetch_custom_attributes: True
+    custom_attributes_allowed:
+    - configurationId
+    fetch_tags: True
+    fetch_alarms: True
+    collect_only:
+        vms: True
+        vmguests: True
+        datastores: True
+        hosts: True
+        snapshots: True
+        resourcepools: False
+```
+
 Switching sections can be done by adding ?section=limited to the URL.
 
 #### Environment Variables
