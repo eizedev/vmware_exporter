@@ -104,12 +104,12 @@ class VmwareCollector():
         # label names and ammount will be needed later to insert labels from custom attributes
         self._labelNames = {
             'vms': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name', 'vm_ip_address', 'uuid', 'instance_uuid'],
-            'vm_perf': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name', 'vm_ip_address', 'uuid', 'instance_uuid'],
+            'vm_perf': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name', 'unit', 'vm_ip_address', 'uuid', 'instance_uuid'],
             'vmguests': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name', 'vm_ip_address', 'uuid', 'instance_uuid'],
             'snapshots': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name'],
             'datastores': ['ds_name', 'dc_name', 'ds_cluster'],
             'hosts': ['host_name', 'dc_name', 'cluster_name'],
-            'host_perf': ['host_name', 'dc_name', 'cluster_name'],
+            'host_perf': ['host_name', 'dc_name', 'cluster_name', 'unit'],
             'resourcepools': ['resourcepool_name', 'dc_name', 'cluster_name', 'resourcepool_status'],
         }
 
@@ -1623,7 +1623,7 @@ class VmwareCollector():
                 for ent in results:
                     for metric in ent.value:
                         vm_metrics[metric_names[metric.id.counterId]].add_metric(
-                            labels[ent.entity._moId],
+                            labels[ent.entity._moId] + [content.perfManager.QueryPerfCounter([metric.id.counterId])[0].unitInfo.label],
                             float(sum(metric.value)),
                         )
 
@@ -1716,7 +1716,7 @@ class VmwareCollector():
             for ent in results:
                 for metric in ent.value:
                     host_metrics[metric_names[metric.id.counterId]].add_metric(
-                        labels[ent.entity._moId],
+                        labels[ent.entity._moId] + [content.perfManager.QueryPerfCounter([metric.id.counterId])[0].unitInfo.label],
                         float(sum(metric.value)),
                     )
 
