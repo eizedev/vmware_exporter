@@ -44,7 +44,8 @@ from pyVim import connect
 
 # Prometheus specific imports
 from prometheus_client.core import GaugeMetricFamily
-from prometheus_client import CollectorRegistry, generate_latest
+from prometheus_client import CollectorRegistry, generate_latest, Gauge
+from prometheus_client.core import REGISTRY
 
 from .helpers import batch_fetch_properties, get_bool_env, get_list_env
 from .defer import parallelize, run_once_property
@@ -2207,6 +2208,7 @@ class VMWareMetricsResource(Resource):
                 'custom_attributes_allowed': get_list_env('VSPHERE_CUSTOM_ATTRIBUTES_ALLOWED'),
                 'fetch_tags': get_bool_env('VSPHERE_FETCH_TAGS', False),
                 'fetch_alarms': get_bool_env('VSPHERE_FETCH_ALARMS', False),
+                'exporter_metrics': get_bool_env('VSPHERE_EXPORTER_METRICS', True),
                 'collect_only': {
                     'vms': get_bool_env('VSPHERE_COLLECT_VMS', True),
                     'vmguests': get_bool_env('VSPHERE_COLLECT_VMGUESTS', True),
@@ -2274,6 +2276,8 @@ class VMWareMetricsResource(Resource):
             logging.info("{} is not a valid section, using default".format(section))
             section = 'default'
 
+        get_exporter_metrics = self.config[section].get('exporter_metrics')
+
         if self.config[section].get('vsphere_host') and self.config[section].get('vsphere_host') != "None":
             vsphere_host = self.config[section].get('vsphere_host')
         elif request.args.get(b'target', [None])[0]:
@@ -2306,6 +2310,23 @@ class VMWareMetricsResource(Resource):
             self.config[section]['fetch_alarms'],
         )
         metrics = yield collector.collect()
+
+        do_metrics_registration = True
+
+        if get_exporter_metrics:
+            registry = REGISTRY
+            if 'vmware_exporter_build_info' in registry._names_to_collectors:
+                do_metrics_registration = False
+            else:
+                g = Gauge('vmware_exporter_build_info',
+                          'A metric with a constant \'1\' value labeled by version of vmware-exporter.',
+                          ["version"], registry=registry)
+                g.labels(version=__version__)
+        else:
+            registry = CollectorRegistry()
+
+        if do_metrics_registration:
+            registry.register(ListCollector(metrics))
 
         registry = CollectorRegistry()
         registry.register(ListCollector(metrics))
