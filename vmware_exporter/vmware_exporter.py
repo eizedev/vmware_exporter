@@ -157,6 +157,14 @@ class VmwareCollector():
                 'vmware_vm_template',
                 'VMWare VM Template (true / false)',
                 labels=self._labelNames['vms']),
+             'vmware_vm_storage_committed': GaugeMetricFamily(
+                'vmware_vm_storage_committed',
+                'VMWare VM committed storage',
+                labels=self._labelNames['vms']),
+            'vmware_vm_storage_uncommitted': GaugeMetricFamily(
+                'vmware_vm_storage_uncommitted',
+                'VMWare VM uncommitted storage',
+                labels=self._labelNames['vms']),
         }
         metric_list['vmguests'] = {
             'vmware_vm_guest_disk_free': GaugeMetricFamily(
@@ -876,6 +884,8 @@ class VmwareCollector():
                 'summary.config.memorySizeMB',
                 'runtime.maxCpuUsage',
                 'summary.config.template',
+                'summary.storage.committed',
+                'summary.storage.uncommitted',
             ])
 
         if self.collect_only['vmguests'] is True:
@@ -1850,6 +1860,12 @@ class VmwareCollector():
 
             if 'summary.config.template' in row:
                 metrics['vmware_vm_template'].add_metric(labels, row['summary.config.template'])
+
+            if 'summary.storage.committed' in row:
+                metrics['vmware_vm_storage_committed'].add_metric(labels, row['summary.storage.committed'])
+
+            if 'summary.storage.uncommitted' in row:
+                metrics['vmware_vm_storage_uncommitted'].add_metric(labels, row['summary.storage.uncommitted'])
 
             if 'guest.disk' in row and len(row['guest.disk']) > 0:
                 for disk in row['guest.disk']:
