@@ -506,6 +506,7 @@ class VmwareCollector():
     def collect(self):
         """ collects metrics """
         vsphere_host = self.host
+        vsphere_host = vsphere_host.replace('\r\n', '').replace('\n', '')
 
         metrics = self._create_metric_containers()
 
