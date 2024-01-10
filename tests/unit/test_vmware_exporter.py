@@ -63,6 +63,7 @@ def test_collect_vms():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
+        'resourcePools': False,
     }
 
     # Test runtime.host not found
@@ -525,6 +526,7 @@ def test_collect_vm_perf():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
+        'resourcePools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -646,6 +648,7 @@ def test_collect_hosts():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
+        'resourcePools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1124,6 +1127,7 @@ def test_collect_datastore():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
+        'resourcePools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1227,6 +1231,7 @@ def test_collect():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
+        'resourcePools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1264,6 +1269,7 @@ def test_collect_deferred_error_works():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
+        'resourcePools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1367,6 +1373,7 @@ def test_vmware_get_inventory():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
+        'resourcePools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1412,6 +1419,7 @@ def test_vmware_connect():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
+        'resourcePools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1441,6 +1449,7 @@ def test_vmware_disconnect():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
+        'resourcePools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1477,6 +1486,7 @@ def test_counter_ids():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
+        'resourcePools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
