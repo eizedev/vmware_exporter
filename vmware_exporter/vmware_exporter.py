@@ -97,9 +97,12 @@ class VmwareCollector():
 
         # label names and amount will be needed later to insert labels from custom attributes
         self._labelNames = {
-            'vms': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name', 'vm_ip_address', 'uuid', 'instance_uuid'],
-            'vm_perf': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name', 'unit', 'vm_ip_address', 'uuid', 'instance_uuid'],
-            'vmguests': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name', 'vm_ip_address', 'uuid', 'instance_uuid'],
+            'vms': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name', 'vm_ip_address',
+                    'uuid', 'instance_uuid'],
+            'vm_perf': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name', 'unit', 'vm_ip_address',
+                        'uuid', 'instance_uuid'],
+            'vmguests': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name', 'vm_ip_address',
+                         'uuid', 'instance_uuid'],
             'snapshots': ['vm_name', 'ds_name', 'host_name', 'dc_name', 'cluster_name'],
             'datastores': ['ds_name', 'dc_name', 'ds_cluster'],
             'hosts': ['host_name', 'dc_name', 'cluster_name'],
@@ -2147,40 +2150,35 @@ class VmwareCollector():
                 if sensor["unit"] == 'rpm':
                     host_metrics['vmware_host_sensor_fan'].add_metric(
                         labels + [sensor['name']],
-                        int(sensor['value']) *
-                        (10 ** (int(sensor['unitModifier'])))
+                        int(sensor['value']) * (10 ** (int(sensor['unitModifier'])))
                     )
 
                 # Temperature
                 if sensor["unit"] == 'degrees c':
                     host_metrics['vmware_host_sensor_temperature'].add_metric(
                         labels + [sensor['name']],
-                        int(sensor['value']) *
-                        (10 ** (int(sensor['unitModifier'])))
+                        int(sensor['value']) * (10 ** (int(sensor['unitModifier'])))
                     )
 
                 # Power Voltage
                 if sensor["unit"] == 'volts':
                     host_metrics['vmware_host_sensor_power_voltage'].add_metric(
                         labels + [sensor['name']],
-                        int(sensor['value']) *
-                        (10 ** (int(sensor['unitModifier'])))
+                        int(sensor['value']) * (10 ** (int(sensor['unitModifier'])))
                     )
 
                 # Power Current
                 if sensor["unit"] == 'amps':
                     host_metrics['vmware_host_sensor_power_current'].add_metric(
                         labels + [sensor['name']],
-                        int(sensor['value']) *
-                        (10 ** (int(sensor['unitModifier'])))
+                        int(sensor['value']) * (10 ** (int(sensor['unitModifier'])))
                     )
 
                 # Power Watt
                 if sensor["unit"] == 'watts':
                     host_metrics['vmware_host_sensor_power_watt'].add_metric(
                         labels + [sensor['name']],
-                        int(sensor['value']) *
-                        (10 ** (int(sensor['unitModifier'])))
+                        int(sensor['value']) * (10 ** (int(sensor['unitModifier'])))
                     )
 
                 # Redundancy
