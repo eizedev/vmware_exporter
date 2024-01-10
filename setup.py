@@ -15,10 +15,9 @@ setup(
     license=vmware_exporter.__license__,
     packages=find_packages(exclude=['*.test', '*.test.*']),
     include_package_data=True,
-    install_requires=open('requirements.txt').readlines(),
     entry_points={
         'console_scripts': [
             'vmware_exporter=vmware_exporter.vmware_exporter:main'
         ]
-    }
+    },
 )
