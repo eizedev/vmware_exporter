@@ -449,7 +449,6 @@ def test_no_error_onempty_vms():
         ignore_ssl=True,
         fetch_custom_attributes=False,
         custom_attributes_allowed=[],
-        ignore_ssl=True,
         fetch_tags=False,
         fetch_alarms=False
     )
