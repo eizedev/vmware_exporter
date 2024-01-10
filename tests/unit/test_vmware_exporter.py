@@ -63,7 +63,7 @@ def test_collect_vms():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
-        'resourcePools': False,
+        'resourcepools': False,
     }
 
     # Test runtime.host not found
@@ -370,6 +370,7 @@ def test_metrics_without_hostaccess():
         'datastores': False,
         'hosts': False,
         'snapshots': False,
+        'resourcepools': False,
     }
 
     collector = VmwareCollector(
@@ -439,6 +440,7 @@ def test_no_error_onempty_vms():
         'datastores': False,
         'hosts': False,
         'snapshots': False,
+        'resourcepools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -526,7 +528,7 @@ def test_collect_vm_perf():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
-        'resourcePools': False,
+        'resourcepools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -648,7 +650,7 @@ def test_collect_hosts():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
-        'resourcePools': False,
+        'resourcepools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1012,6 +1014,7 @@ def test_collect_host_perf():
         'datastores': False,
         'hosts': True,
         'snapshots': False,
+        'resourcepools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1127,7 +1130,7 @@ def test_collect_datastore():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
-        'resourcePools': False,
+        'resourcepools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1231,7 +1234,7 @@ def test_collect():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
-        'resourcePools': False,
+        'resourcepools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1269,7 +1272,7 @@ def test_collect_deferred_error_works():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
-        'resourcePools': False,
+        'resourcepools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1373,7 +1376,7 @@ def test_vmware_get_inventory():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
-        'resourcePools': False,
+        'resourcepools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1419,7 +1422,7 @@ def test_vmware_connect():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
-        'resourcePools': False,
+        'resourcepools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1449,7 +1452,7 @@ def test_vmware_disconnect():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
-        'resourcePools': False,
+        'resourcepools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1486,7 +1489,7 @@ def test_counter_ids():
         'datastores': True,
         'hosts': True,
         'snapshots': True,
-        'resourcePools': False,
+        'resourcepools': False,
     }
     collector = VmwareCollector(
         '127.0.0.1',
@@ -1649,6 +1652,7 @@ def test_vmware_resource_async_render_GET_section():
                 'snapshots': True,
                 'vmguests': True,
                 'vms': True,
+                'resourcepools': False,
             }
         },
         'mysection': {
@@ -1666,6 +1670,7 @@ def test_vmware_resource_async_render_GET_section():
                 'snapshots': True,
                 'vmguests': True,
                 'vms': True,
+                'resourcepools': False,
             }
         }
     }
@@ -1762,6 +1767,7 @@ def test_config_env_multiple_sections():
                 'snapshots': True,
                 'vmguests': True,
                 'vms': True,
+                'resourcepools': False,
             }
         },
         'mysection': {
@@ -1780,6 +1786,7 @@ def test_config_env_multiple_sections():
                 'snapshots': True,
                 'vmguests': True,
                 'vms': True,
+                'resourcepools': False,
             }
         }
     }
