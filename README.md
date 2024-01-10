@@ -21,7 +21,7 @@ Get VMware vCenter information:
 
 ## Usage
 
-> Requires Python >= 3.6
+> Requires Python >= 3.8
 
 - Install with `$ python setup.py install` or via pip `$ pip install vmware_exporter`. The docker command below is preferred.
 - Create `config.yml` based on the configuration section. Some variables can be passed as environment variables
