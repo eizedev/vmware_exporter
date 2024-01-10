@@ -292,13 +292,13 @@ class VmwareCollector():
                 'vmware_datastore_freespace_size',
                 'VMWare Datastore freespace in bytes',
                 labels=self._labelNames['datastores']),
-            'vmware_datastore_uncommited_size': GaugeMetricFamily(
-                'vmware_datastore_uncommited_size',
+            'vmware_datastore_uncommitted_size': GaugeMetricFamily(
+                'vmware_datastore_uncommitted_size',
                 'VMWare Datastore uncommitted in bytes',
                 labels=self._labelNames['datastores']),
-            'vmware_datastore_provisoned_size': GaugeMetricFamily(
-                'vmware_datastore_provisoned_size',
-                'VMWare Datastore provisoned in bytes',
+            'vmware_datastore_provisioned_size': GaugeMetricFamily(
+                'vmware_datastore_provisioned_size',
+                'VMWare Datastore provisioned in bytes',
                 labels=self._labelNames['datastores']),
             'vmware_datastore_hosts': GaugeMetricFamily(
                 'vmware_datastore_hosts',
@@ -1341,18 +1341,18 @@ class VmwareCollector():
 
             if host_moid in host_labels:
                 labels[moid] = labels[moid] + host_labels[host_moid]
-
+            if 'guest.ipAddress' in row:
+                labels[moid] = labels[moid] + [row['guest.ipAddress']]
+            else:
+                labels[moid] += ["n/a"]
             if 'summary.config.uuid' in row:
                 labels[moid] += [row['summary.config.uuid']]
             else:
-                labels[moid] += ["no_uuid"]
+                labels[moid] += ["n/a"]
             if 'summary.config.instanceUuid' in row:
                 labels[moid] += [row['summary.config.instanceUuid']]
             else:
-                labels[moid] += ["no_instanceUuid"]
-
-            if 'guest.ipAddress' in row:
-                labels[moid] = labels[moid] + [row['guest.ipAddress']]
+                labels[moid] += ["n/a"]
 
             """
             this code was in vm_inventory before
@@ -1368,7 +1368,7 @@ class VmwareCollector():
 
             if labels_cnt < len(self._labelNames['vms']):
                 logging.info(
-                    "Only ${cnt}/{expected} labels (vm, host, dc, cluster) found, filling n/a"
+                    "Only {cnt}/{expected} labels (vm, ds, host, dc, cluster, ip, (instance_)uuid) found, filling n/a"
                     .format(
                         cnt=labels_cnt,
                         expected=len(self._labelNames['vms'])
@@ -1554,9 +1554,9 @@ class VmwareCollector():
                 labels, ds_capacity)
             ds_metrics['vmware_datastore_freespace_size'].add_metric(
                 labels, ds_freespace)
-            ds_metrics['vmware_datastore_uncommited_size'].add_metric(
+            ds_metrics['vmware_datastore_uncommitted_size'].add_metric(
                 labels, ds_uncommitted)
-            ds_metrics['vmware_datastore_provisoned_size'].add_metric(
+            ds_metrics['vmware_datastore_provisioned_size'].add_metric(
                 labels, ds_provisioned)
 
             ds_metrics['vmware_datastore_hosts'].add_metric(
