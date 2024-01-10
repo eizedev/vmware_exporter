@@ -84,15 +84,15 @@ class VmwareCollector():
         self._vmsPoolAttributes = {}
 
         # Tags
-        # flag to wheter fetch tags or not
+        # flag to whether fetch tags or not
         self.fetch_tags = fetch_tags
 
         # Resourcepools
-        # flag to wheter fetch resourcepools or not
+        # flag to whether fetch resourcepools or not
         self.fetch_resourcepools = collect_only['resourcepools'] is True
 
         # Alarms
-        # flag wheter to fetch alarms or not
+        # flag whether to fetch alarms or not
         self.fetch_alarms = fetch_alarms
 
         # label names and amount will be needed later to insert labels from custom attributes
@@ -523,7 +523,7 @@ class VmwareCollector():
 
         tasks = []
 
-        # Collect vm / snahpshot / vmguest metrics
+        # Collect vm / snapshot / vmguest metrics
         if collect_only['vmguests'] is True or collect_only['vms'] is True or collect_only['snapshots'] is True:
             tasks.append(self._vmware_get_vms(metrics))
 
