@@ -69,12 +69,15 @@ def test_collect_vms():
 
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
         5000,
         False,
+        [],
         True,
+        False,
         False
     )
     collector.content = _succeed(mock.Mock())
@@ -152,12 +155,15 @@ def test_collect_vms():
 
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
         5000,
         False,
+        [],
         True,
+        False,
         False
     )
     collector.content = _succeed(mock.Mock())
@@ -367,12 +373,15 @@ def test_metrics_without_hostaccess():
 
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
         5000,
         False,
+        [],
         True,
+        False,
         False
     )
     metrics = collector._create_metric_containers()
@@ -432,11 +441,17 @@ def test_no_error_onempty_vms():
     }
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
         5000,
         ignore_ssl=True,
+        fetch_custom_attributes=False,
+        custom_attributes_allowed=[],
+        ignore_ssl=True,
+        fetch_tags=False,
+        fetch_alarms=False
     )
 
     metrics = collector._create_metric_containers()
@@ -514,6 +529,7 @@ def test_collect_vm_perf():
     }
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
@@ -634,14 +650,17 @@ def test_collect_hosts():
     }
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
         5000,
-        True,
-        False,
-        False,
-        True
+        ignore_ssl=True,
+        fetch_custom_attributes=False,
+        custom_attributes_allowed=[],
+        ignore_ssl=True,
+        fetch_tags=False,
+        fetch_alarms=False
     )
     collector.content = _succeed(mock.Mock())
 
@@ -995,6 +1014,7 @@ def test_collect_host_perf():
     }
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
@@ -1109,11 +1129,13 @@ def test_collect_datastore():
     }
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
         5000,
         True,
+        [],
         True,
         True,
         True
@@ -1210,6 +1232,7 @@ def test_collect():
     }
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
@@ -1246,6 +1269,7 @@ def test_collect_deferred_error_works():
     }
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
@@ -1348,6 +1372,7 @@ def test_vmware_get_inventory():
     }
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
@@ -1392,6 +1417,7 @@ def test_vmware_connect():
     }
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
@@ -1420,6 +1446,7 @@ def test_vmware_disconnect():
     }
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
@@ -1455,6 +1482,7 @@ def test_counter_ids():
     }
     collector = VmwareCollector(
         '127.0.0.1',
+        '443',
         'root',
         'password',
         collect_only,
