@@ -2384,6 +2384,7 @@ class VMWareMetricsResource(Resource):
     def generate_latest_metrics(self, request):
         """ gets the latest metrics """
         section = request.args.get(b'section', [b'default'])[0].decode('utf-8')
+        section = section.replace('\r\n', '').replace('\n', '')
         if section not in self.config.keys():
             logging.info(
                 "{} is not a valid section, using default".format(section))
