@@ -74,7 +74,7 @@ class VmwareCollector():
         self._session = None
 
         # Custom Attributes
-        # flag to wheter fetch custom attributes or not
+        # flag to whether fetch custom attributes or not
         self.fetch_custom_attributes = fetch_custom_attributes
         self.custom_attributes_allowed = custom_attributes_allowed
         # vms, hosts and datastores custom attributes must be stored by their moid
@@ -178,6 +178,10 @@ class VmwareCollector():
                 'vmware_vm_guest_os',
                 'Guest operating system name configured on the virtual machine',
                 labels=self._labelNames['vmguests'] + ['os', ]),
+            'vmware_vm_guest_state': GaugeMetricFamily(
+                'vmware_vm_guest_state',
+                'Operation mode of guest operating system',
+                labels=self._labelNames['vmguests'] + ['guest_state', ]),
             'vmware_vm_guest_tools_running_status': GaugeMetricFamily(
                 'vmware_vm_guest_tools_running_status',
                 'VM tools running status',
@@ -916,6 +920,7 @@ class VmwareCollector():
             properties.extend([
                 'guest.disk',
                 'guest.guestFullName',
+                'guest.guestState',
                 'guest.toolsStatus',
                 'guest.toolsVersion',
                 'guest.toolsVersionStatus2',
@@ -2005,6 +2010,11 @@ class VmwareCollector():
             if 'guest.guestFullName' in row:
                 metrics['vmware_vm_guest_os'].add_metric(
                     labels + [row['guest.guestFullName']], 1
+                )
+
+            if 'guest.guestState' in row:
+                metrics['vmware_vm_guest_state'].add_metric(
+                    labels + [row['guest.guestState']], 1
                 )
 
             if 'guest.toolsStatus' in row:
