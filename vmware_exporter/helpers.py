@@ -5,11 +5,13 @@ from pyVmomi import vmodl
 
 def get_bool_env(key: str, default: bool):
     value = os.environ.get(key, default)
-    return value if type(value) == bool else value.lower() == 'true'
+    return value if isinstance(value, bool) else value.lower() == 'true'
+
 
 def get_list_env(key: str):
     from_env = os.environ.get(key, "")
     return from_env.split(",")
+
 
 def batch_fetch_properties(content, obj_type, properties):
     view_ref = content.viewManager.CreateContainerView(
@@ -19,7 +21,7 @@ def batch_fetch_properties(content, obj_type, properties):
     )
 
     """
-        Gathering all custom attibutes names are stored as key (integer) in CustomFieldsManager
+        Gathering all custom attributes names are stored as key (integer) in CustomFieldsManager
         We do not want those keys, but the names. So here the names and keys are gathered to
         be translated later
     """
