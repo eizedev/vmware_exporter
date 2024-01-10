@@ -1654,6 +1654,7 @@ def test_vmware_resource_async_render_GET_section():
     request.write.assert_called_with(b'')
     request.finish.assert_called_with()
 
+
 @pytest.mark.skipif(platform.startswith("win"), reason="Requires Linux")
 @pytest_twisted.inlineCallbacks
 def test_vmware_resource_async_render_GET_exportermetrics():
@@ -1685,6 +1686,7 @@ def test_vmware_resource_async_render_GET_exportermetrics():
 
     assert 'process_resident_memory_bytes' in metrics
     assert 'vmware_exporter_build_info' in metrics
+
 
 def test_config_env_multiple_sections():
     env = {
