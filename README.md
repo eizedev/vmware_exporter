@@ -14,9 +14,9 @@ Get VMware vCenter information:
 ![Docker Stars](https://img.shields.io/docker/stars/pryorda/vmware_exporter.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/pryorda/vmware_exporter.svg)
 ![Docker Automated](https://img.shields.io/docker/automated/pryorda/vmware_exporter.svg)
-
 ![Docker Size](https://img.shields.io/docker/image-size/pryorda/vmware_exporter)
 ![Docker Version](https://img.shields.io/docker/v/pryorda/vmware_exporter)
+
 [![Join the chat at https://gitter.im/vmware_exporter/community](https://badges.gitter.im/vmware_exporter/community.svg)](https://gitter.im/vmware_exporter/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Usage
